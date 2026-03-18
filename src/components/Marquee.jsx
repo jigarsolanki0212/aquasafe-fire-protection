@@ -2,23 +2,23 @@ import React from 'react';
 
 const Marquee = () => {
   const items = [
-    "MSME Registered", 
-    "GeM Marketplace", 
-    "Make In India", 
-    "FSSAI Certified", 
-    "Fire NOC Consultancy", 
-    "500+ Projects", 
-    "Based in Ahmedabad", 
-    "24/7 Support"
+    { icon: '🏛️', text: "MSME Registered" },
+    { icon: '🛒', text: "GeM Marketplace" },
+    { icon: '🇮🇳', text: "Make In India" },
+    { icon: '✅', text: "FSSAI Certified" },
+    { icon: '🔥', text: "Fire NOC Consultancy" },
+    { icon: '🏆', text: "500+ Projects" },
+    { icon: '📍', text: "Based in Ahmedabad" },
+    { icon: '📞', text: "24/7 Support" }
   ];
 
   return (
-    <div className="marquee-container">
-      <div className="marquee-content">
+    <div className="trust-strip">
+      <div className="trust-track">
         {[...items, ...items, ...items].map((item, index) => (
-          <div key={index} className="marquee-item">
-            <span className="marquee-dot">•</span>
-            {item}
+          <div key={index} className="trust-item">
+            <span style={{ fontSize: '1.2rem' }}>{item.icon}</span>
+            <span>{item.text}</span>
           </div>
         ))}
       </div>

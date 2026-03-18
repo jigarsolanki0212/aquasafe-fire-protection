@@ -17,8 +17,7 @@ function App() {
     const glow = document.getElementById('cursor-glow');
     const updateMousePos = (e) => {
       if (glow) {
-        glow.style.left = `${e.clientX}px`;
-        glow.style.top = `${e.clientY}px`;
+        glow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       }
     };
     window.addEventListener('mousemove', updateMousePos);
@@ -26,7 +25,7 @@ function App() {
     // Scroll reveal logic
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     
     const reveals = document.querySelectorAll('.reveal');
     reveals.forEach(el => obs.observe(el));
@@ -37,13 +36,18 @@ function App() {
         if (e.isIntersecting) {
           const counters = e.target.querySelectorAll('.counter');
           counters.forEach(c => {
-            const target = parseInt(c.getAttribute('data-target'));
+            const targetStr = c.getAttribute('data-target');
+            const target = parseInt(targetStr);
             let count = 0;
-            const step = target / 60;
+            const duration = 2000;
+            const step = target / (duration / 20);
             const timer = setInterval(() => {
               count = Math.min(count + step, target);
-              c.innerText = Math.floor(count) + (target === 100 ? '%' : '+');
-              if (count >= target) clearInterval(timer);
+              c.innerText = Math.floor(count) + (targetStr.includes('%') || c.innerText.includes('%') ? '%' : '+');
+              if (count >= target) {
+                c.innerText = targetStr + (targetStr.includes('%') ? '' : '+');
+                clearInterval(timer);
+              }
             }, 20);
           });
           statsObs.unobserve(e.target);
@@ -62,7 +66,7 @@ function App() {
   }, []);
 
   return (
-    <main>
+    <main style={{ position: 'relative' }}>
       <div id="cursor-glow"></div>
       <Navbar />
       <Hero />

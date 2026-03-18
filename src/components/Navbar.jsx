@@ -13,9 +13,9 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="flex items-center justify-between" style={{ height: '100%', maxWidth: '1200px', margin: 'auto', width: '100%' }}>
+      <div className="nav-inner">
         <a className="flex items-center gap-1" href="#home" style={{ textDecoration: 'none' }}>
-          <svg className="logo-flame" viewBox="0 0 40 48" fill="none">
+          <svg className="logo-flame" viewBox="0 0 40 48" fill="none" style={{ flexShrink: 0 }}>
             <path d="M20 2C20 2 8 16 8 28c0 7.7 5.4 14 12 14s12-6.3 12-14C32 20 20 2 20 2z" fill="url(#fg1)"/>
             <path d="M20 18c0 0-5 7-5 13 0 3.3 2.2 6 5 6s5-2.7 5-6c0-6-5-13-5-13z" fill="url(#fg2)" opacity="0.8"/>
             <defs>
@@ -31,7 +31,7 @@ const Navbar = () => {
           </svg>
           <div className="logo-text">
             <div className="brand"><span className="a">Aqua</span> Safe <span className="f">Fire</span></div>
-            <div className="sub">Safety Success Protection</div>
+            <div className="sub">Safety · AMC · Refilling</div>
           </div>
         </a>
         
@@ -43,7 +43,7 @@ const Navbar = () => {
           <li><a href="#contact">Contact</a></li>
         </ul>
         
-        <a className="btn-fire" href="#contact" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>
+        <a className="btn-fire" href="#contact" style={{ padding: '12px 28px', fontSize: '0.85rem' }}>
           🔥 Get Quote
         </a>
       </div>
