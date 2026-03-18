@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Marquee from './components/Marquee';
@@ -91,6 +92,7 @@ function App() {
       </div>
       <Footer />
       <WhatsAppButton />
+      <Analytics />
     </main>
   );
 }
