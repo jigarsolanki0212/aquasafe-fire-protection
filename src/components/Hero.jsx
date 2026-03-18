@@ -1,112 +1,115 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const Hero = () => {
   const [particles, setParticles] = useState([]);
+  const shieldRef = useRef(null);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 25 }).map((_, i) => ({
+    // Generate fire particles
+    const ps = Array.from({ length: 40 }).map((_, i) => ({
       left: `${Math.random() * 100}%`,
-      delay: `${Math.random() * 10}s`,
-      size: `${2 + Math.random() * 4}px`,
-      color: ['#f5820d', '#e8251a', '#ffb347'][Math.floor(Math.random() * 3)]
+      delay: `${Math.random() * 8}s`,
+      size: `${Math.random() * 5 + 2}px`,
+      duration: `${4 + Math.random() * 6}s`,
+      opacity: 0.1 + Math.random() * 0.4
     }));
-    setParticles(newParticles);
+    setParticles(ps);
+
+    // Parallax logic for shield
+    const handleMouse = (e) => {
+      if (shieldRef.current) {
+        const x = (e.clientX - window.innerWidth / 2) / 25;
+        const y = (e.clientY - window.innerHeight / 2) / 25;
+        shieldRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      }
+    };
+    window.addEventListener('mousemove', handleMouse);
+    return () => window.removeEventListener('mousemove', handleMouse);
   }, []);
 
   return (
     <section className="hero" id="home">
-      <div className="hero-bg"></div>
-      <div className="particles-container" style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      <div className="bg-aura"></div>
+      <div className="particles-container" style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
         {particles.map((p, i) => (
-          <div 
-            key={i} 
-            className="particle" 
-            style={{ 
-              left: p.left, 
-              animationDelay: p.delay, 
-              width: p.size, 
-              height: p.size, 
-              background: p.color,
-              position: 'absolute',
-              bottom: '-20px',
-              borderRadius: '50%',
-              animation: 'rise 8s linear infinite'
-            }}
-          />
+          <div key={i} style={{
+            position: 'absolute',
+            bottom: '-10px',
+            left: p.left,
+            width: p.size,
+            height: p.size,
+            background: 'var(--red)',
+            borderRadius: '50%',
+            opacity: p.opacity,
+            filter: 'blur(1px)',
+            animation: `rise ${p.duration} linear ${p.delay} infinite`
+          }} />
         ))}
       </div>
 
-      <div className="inner">
-        <div className="hero-inner">
-          <div className="hero-left reveal visible">
-            <div className="s-tag" style={{ display: 'flex', alignItems: 'center' }}>
-              <div className="badge-dot"></div>
-              MSME · GeM · Make In India · FSSAI
-            </div>
-            
-            <h1 className="s-title" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.2rem)' }}>
-              Gujarat's Most<br />
-              <span className="gradient-text">Trusted Fire</span><br />
-              Safety Partner
+      <div className="container">
+        <div className="grid-2">
+          <div className="hero-content reveal visible" style={{ textAlign: 'left' }}>
+            <div className="s-tag"> ગુજરાતનું સૌથી વિશ્વસનીય ફાયર સર્વિસ પાર્ટનર 🛡️</div>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: '1.05', marginBottom: '24px' }}>
+              We Secure What <br />
+              <span className="gradient-text">You've Built.</span> <br />
+              With Precision.
             </h1>
-            
-            <p className="s-sub" style={{ marginBottom: '32px' }}>
-              Complete fire protection solutions for homes, industries & commercial spaces. 
-              Installation, AMC, refilling, NOC consultancy & fire training — all under one roof.
+            <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', maxWidth: '600px', marginBottom: '40px' }}>
+              Ahmedabad's leading fire safety company delivering end-to-end protection for 
+              industrial, commercial, and residential spaces. Government certified. GeM listed. Unmatched quality.
             </p>
-
-            <div className="flex gap-1" style={{ flexWrap: 'wrap', gap: '16px' }}>
-              <a href="#contact" className="btn-fire">🔥 Free Consultation</a>
-              <a href="https://wa.me/917383374584" className="btn-ghost">💬 WhatsApp Now</a>
+            
+            <div className="flex gap-1" style={{ flexWrap: 'wrap', gap: '20px' }}>
+              <a href="#contact" className="btn-fire">🔥 Request a Consultation</a>
+              <a href="https://wa.me/917383374584" className="btn-ghost" target="_blank" rel="noreferrer">
+                💬 WhatsApp Now
+              </a>
             </div>
 
-            <div className="hero-stats">
-              <div className="hstat">
+            <div className="hero-stats reveal visible">
+              <div className="stat-box">
                 <div className="hstat-num counter" data-target="500">500+</div>
-                <div className="hstat-label">Projects</div>
+                <div className="hstat-label">Projects Done</div>
               </div>
-              <div className="hstat">
+              <div className="stat-box">
                 <div className="hstat-num counter" data-target="100">100%</div>
-                <div className="hstat-label">Compliant</div>
+                <div className="hstat-label">Compliance</div>
               </div>
-              <div className="hstat">
+              <div className="stat-box">
                 <div className="hstat-num">24/7</div>
-                <div className="hstat-label">Support</div>
+                <div className="hstat-label">Expert Support</div>
               </div>
-              <div className="hstat">
+              <div className="stat-box">
                 <div className="hstat-num">AMC</div>
-                <div className="hstat-label">Available</div>
+                <div className="hstat-label">Professional</div>
               </div>
             </div>
           </div>
 
-          <div className="hero-visual reveal visible">
-            <div className="shield-container">
-              <div className="shield-ring ring1"></div>
-              <div className="shield-ring ring2"></div>
-              {/* Shield SVG */}
-              <svg className="main-shield" viewBox="0 0 160 180" fill="none">
-                <path d="M80 8L16 36v54c0 40 27 72 64 80 37-8 64-40 64-80V36L80 8z" fill="url(#sg1)" stroke="url(#sg2)" stroke-width="1.5"/>
-                <path d="M80 40c0 0-12 24-12 44 0 9 4 18 12 20 8-2 12-11 12-20 0-20-12-44-12-44z" fill="url(#ff1)"/>
+          <div className="hero-visual reveal visible" style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="shield-parallax" ref={shieldRef}>
+              <div className="shield-orbital"></div>
+              <div className="shield-orbital" style={{ width: '80%', height: '80%', top: '10%', left: '10%', animationDirection: 'reverse', animationDuration: '20s' }}></div>
+              <svg className="shield-main" viewBox="0 0 160 180" fill="none">
+                <path d="M80 8L16 36v54c0 40 27 72 64 80 37-8 64-40 64-80V36L80 8z" fill="url(#sh1)" stroke="url(#sh2)" strokeWidth="2"/>
+                <path d="M80 40c0 0-12 24-12 44 0 9 4 18 12 20 8-2 12-11 12-20 0-20-12-44-12-44z" fill="white" fillOpacity="0.1"/>
                 <defs>
-                  <linearGradient id="sg1" x1="80" y1="8" x2="80" y2="170" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#e8251a" stopOpacity="0.2"/>
-                    <stop offset="100%" stopColor="#f5820d" stopOpacity="0.1"/>
+                  <linearGradient id="sh1" x1="80" y1="8" x2="80" y2="170" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#e8251a" stopOpacity="0.8"/>
+                    <stop offset="100%" stopColor="#f5820d" stopOpacity="0.9"/>
                   </linearGradient>
-                  <linearGradient id="sg2" x1="80" y1="8" x2="80" y2="170" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#f5820d"/>
-                    <stop offset="100%" stopColor="#e8251a"/>
-                  </linearGradient>
-                  <linearGradient id="ff1" x1="80" y1="40" x2="80" y2="110">
+                  <linearGradient id="sh2" x1="80" y1="8" x2="80" y2="170" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#ffb347"/>
-                    <stop offset="100%" stopColor="#f5820d"/>
+                    <stop offset="100%" stopColor="#e8251a"/>
                   </linearGradient>
                 </defs>
               </svg>
-              {/* Floating Tags */}
-              <div className="floating-tag tag1 glass-card" style={{ position: 'absolute', top: '10%', right: '-10%', padding: '10px 18px', borderRadius: '12px', background: 'var(--dark2)', border: '1px solid var(--border)', fontSize: '0.8rem', fontWeight: '700', animation: 'float 4s ease-in-out infinite' }}>🛡️ NOC Consultancy</div>
-              <div className="floating-tag tag2 glass-card" style={{ position: 'absolute', bottom: '15%', left: '-15%', padding: '10px 18px', borderRadius: '12px', background: 'var(--dark2)', border: '1px solid var(--border)', fontSize: '0.8rem', fontWeight: '700', animation: 'float 5s ease-in-out infinite' }}>🧯 Full Servicing</div>
-              <div className="floating-tag tag3 glass-card" style={{ position: 'absolute', top: '50%', right: '-25%', padding: '10px 18px', borderRadius: '12px', background: 'var(--dark2)', border: '1px solid var(--border)', fontSize: '0.8rem', fontWeight: '700', animation: 'float 3.5s ease-in-out infinite' }}>✅ GeM Registered</div>
+              {/* Floating tags with stagger */}
+              <div className="chip" style={{ position: 'absolute', top: '5%', right: '-15%', animation: 'floating 5s ease-in-out infinite' }}>NOC & Design 📐</div>
+              <div className="chip" style={{ position: 'absolute', bottom: '15%', left: '-15%', animation: 'floating 4s ease-in-out infinite' }}>Refilling Support 🔁</div>
+              <div className="chip" style={{ position: 'absolute', top: '50%', right: '-30%', animation: 'floating 3s ease-in-out infinite' }}>GeM Listed ✅</div>
             </div>
           </div>
         </div>

@@ -15,10 +15,10 @@ const Marquee = () => {
   return (
     <div className="trust-strip">
       <div className="trust-track">
-        {[...items, ...items, ...items].map((item, index) => (
+        {[...items, ...items, ...items, ...items].map((item, index) => (
           <div key={index} className="trust-item">
-            <span style={{ fontSize: '1.2rem' }}>{item.icon}</span>
-            <span>{item.text}</span>
+            <span style={{ fontSize: '1.4rem' }}>{item.icon}</span>
+            <span style={{ letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.8rem', fontWeight: '700' }}>{item.text}</span>
           </div>
         ))}
       </div>
