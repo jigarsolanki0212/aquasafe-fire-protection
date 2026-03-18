@@ -30,34 +30,33 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: '📍', label: 'Registered Office', value: 'Shop No. 512–513, Hiltown Trade Centre, Ahmedabad – 382330', link: 'https://goo.gl/maps/Ahmedabad' },
-    { icon: '📞', label: 'Phone / WhatsApp', value: '+91 73833 74584', link: 'tel:+917383374584' },
-    { icon: '📧', label: 'Email Address', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
-    { icon: '👤', label: 'Contact Person', value: 'Hardik Panchal', link: null },
-    { icon: '🧾', label: 'GSTIN', value: '24FOSPP5631F2ZK', link: null }
+    { icon: '📍', label: 'Registered Office', value: 'Shop No. 512–513, Hiltown Centre, Ahmedabad – 382330', link: 'https://goo.gl/maps/Ahmedabad' },
+    { icon: '📞', label: 'Direct Line', value: '+91 73833 74584', link: 'tel:+917383374584' },
+    { icon: '📧', label: 'Email Support', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
+    { icon: '🧾', label: 'GSTIN / UIN', value: '24FOSPP5631F2ZK', link: null }
   ];
 
   return (
-    <section className="section contact-bg" id="contact">
-      <div className="inner">
+    <section className="section" id="contact" style={{ background: 'var(--dark)' }}>
+      <div className="container">
         <div className="reveal visible" style={{ textAlign: 'center' }}>
-          <div className="s-tag">📞 Contact Us</div>
-          <h2 className="s-title">Get a <span className="gradient-text">Free Quote</span> Today</h2>
-          <p className="s-sub" style={{ margin: '0 auto 56px' }}>Ready to secure your premises? Fill out the form below or connect with us directly on WhatsApp.</p>
+          <div className="s-tag">📞 Immediate Support</div>
+          <h2 className="s-title">Get a <span className="gradient-text">Free Safety Quote</span></h2>
+          <p className="s-sub" style={{ margin: '0 auto 60px' }}>Fill out the form below or connect with our safety experts directly on WhatsApp for an on-site consultation.</p>
         </div>
 
         <div className="contact-wrap">
           <div className="reveal-left visible">
-            <div className="flex flex-col gap-2" style={{ gap: '24px' }}>
+            <div className="flex flex-col gap-2">
               {contactInfo.map((ci, i) => (
-                <div key={i} className="flex items-center gap-1" style={{ gap: '20px' }}>
-                  <div style={{ width: '50px', height: '50px', borderRadius: '14px', background: 'var(--glass)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                <div key={i} className="flex items-center gap-1" style={{ marginBottom: '24px' }}>
+                  <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(255,179,71,0.06)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', flexShrink: 0 }}>
                     {ci.icon}
                   </div>
-                  <div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{ci.label}</div>
-                    <div style={{ fontWeight: '700', fontSize: '1rem' }}>
-                      {ci.link ? <a href={ci.link} style={{ color: 'inherit' }}>{ci.value}</a> : ci.value}
+                  <div style={{ marginLeft: '20px' }}>
+                    <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', fontWeight: '700' }}>{ci.label}</div>
+                    <div style={{ fontWeight: '700', fontSize: '1rem', color: '#fff' }}>
+                      {ci.link ? <a href={ci.link} style={{ color: 'inherit', textDecoration: 'none' }}>{ci.value}</a> : ci.value}
                     </div>
                   </div>
                 </div>
@@ -70,10 +69,10 @@ const Contact = () => {
 
           <div className="reveal-right visible">
             <div className="form-card">
-              <h3 style={{ marginBottom: '24px', fontWeight: '800' }}>🔥 Inquiry Form</h3>
+              <h3 style={{ marginBottom: '32px', fontSize: '1.4rem' }}>🔥 Inquiry Form</h3>
               <form onSubmit={handleSubmit}>
-                <div className="flex" style={{ gap: '16px', flexWrap: 'wrap' }}>
-                  <div className="fg" style={{ flex: '1 1 200px' }}>
+                <div className="form-row">
+                  <div className="fg">
                     <input 
                       type="text" 
                       placeholder="Your Full Name" 
@@ -82,10 +81,10 @@ const Contact = () => {
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
                     />
                   </div>
-                  <div className="fg" style={{ flex: '1 1 200px' }}>
+                  <div className="fg">
                     <input 
                       type="tel" 
-                      placeholder="Phone Number" 
+                      placeholder="Phone (WhatsApp preferred)" 
                       required 
                       value={formData.phone} 
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -96,7 +95,7 @@ const Contact = () => {
                 <div className="fg">
                   <input 
                     type="email" 
-                    placeholder="Email Address" 
+                    placeholder="Official Email Address" 
                     required 
                     value={formData.email} 
                     onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -109,20 +108,20 @@ const Contact = () => {
                     value={formData.service} 
                     onChange={(e) => setFormData({...formData, service: e.target.value})}
                   >
-                    <option value="">Select Service Required</option>
-                    <option value="Extinguisher / Refilling">Fire Extinguisher / Refilling</option>
-                    <option value="Hydrant System">Fire Hydrant System</option>
-                    <option value="Alarm & Detection">Fire Alarm & Detection</option>
-                    <option value="AMC">AMC (Annual Maintenance)</option>
-                    <option value="Consultancy / NOC">Fire Consultancy / NOC</option>
-                    <option value="CCTV / Security">CCTV / Security System</option>
+                    <option value="">Select Required Service</option>
+                    <option value="Fire Extinguisher & Refilling">Fire Extinguisher & Refilling</option>
+                    <option value="Hydrant & Sprinkler Systems">Hydrant & Sprinkler Systems</option>
+                    <option value="Fire Alarm & Detection">Fire Alarm & Detection</option>
+                    <option value="AMC (Annual Maintenance)">AMC (Annual Maintenance)</option>
+                    <option value="Fire Planning & NOC Consultancy">Fire Planning & NOC Consultancy</option>
+                    <option value="CCTV & Industrial Safety">CCTV & Industrial Safety</option>
                   </select>
                 </div>
 
                 <div className="fg">
                   <textarea 
                     rows="4" 
-                    placeholder="Message or specific safety requirements..." 
+                    placeholder="Please describe your premises and safety requirements..." 
                     required 
                     value={formData.message} 
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
@@ -132,9 +131,9 @@ const Contact = () => {
                 <button 
                   type="submit" 
                   className={`btn-fire ${status === 'success' ? 'success' : ''}`} 
-                  style={{ width: '100%', padding: '18px', background: status === 'success' ? '#25d366' : '' }}
+                  style={{ width: '100%', padding: '20px', background: status === 'success' ? '#25d366' : '' }}
                 >
-                  {status === 'idle' && '🔥 Send Inquiry →'}
+                  {status === 'idle' && '🔥 Send Inquiry Now'}
                   {status === 'submitting' && '🚀 Processing...'}
                   {status === 'success' && '✅ Inquiry Sent!'}
                 </button>
