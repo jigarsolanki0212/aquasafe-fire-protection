@@ -8,92 +8,139 @@ const Contact = () => {
     service: '',
     message: ''
   });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus('submitting');
+    
+    // Constructing the email body
+    const emailTo = 'aquasafefireprotection55@gmail.com';
+    const body = `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nService: ${formData.service}\n\nMessage: ${formData.message}`;
+    const subject = `New Inquiry: ${formData.service} from ${formData.name}`;
+    
+    // Opening the user's email client
+    window.location.href = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
     setTimeout(() => {
-      setSubmitted(false);
+      setStatus('success');
       setFormData({ name: '', phone: '', email: '', service: '', message: '' });
-    }, 3000);
+      setTimeout(() => setStatus('idle'), 3000);
+    }, 1000);
   };
 
-  const contactData = [
-    { label: '📍 Address', value: 'Shop No. 512, 513, Hiltown Trade Centre, Near 108 Head Quarters, Kathwada Road, Nava Naroda, Ahmedabad – 382330, Gujarat, India', link: 'https://goo.gl/maps/Ahmedabad' },
-    { label: '📞 Phone', value: '+91 73833 74584', link: 'tel:+917383374584' },
-    { label: '✉️ Email', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
-    { label: '🤵 Owner', value: 'Hardik Panchal', link: null },
-    { label: '🧾 GSTIN', value: '24FOSPP5631F2ZK', link: null }
+  const contactInfo = [
+    { icon: '📍', label: 'Registered Office', value: 'Shop No. 512–513, Hiltown Trade Centre, Ahmedabad – 382330', link: 'https://goo.gl/maps/Ahmedabad' },
+    { icon: '📞', label: 'Phone / WhatsApp', value: '+91 73833 74584', link: 'tel:+917383374584' },
+    { icon: '📧', label: 'Email Address', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
+    { icon: '👤', label: 'Contact Person', value: 'Hardik Panchal', link: null },
+    { icon: '🧾', label: 'GSTIN', value: '24FOSPP5631F2ZK', link: null }
   ];
 
   return (
-    <section className="section bg-color">
-      <div className="reveal">
-        <h2 className="section-title">
-          Get a <span className="gradient-text">Free Quote</span>
-        </h2>
-        <p className="section-subtitle">
-          Contact us today for specialized fire safety consultancy and solutions.
-        </p>
-      </div>
-
-      <div className="contact-grid">
-        <div className="reveal-left">
-          <div className="flex flex-col gap-1">
-            {contactData.map((c, i) => (
-              <div key={i} className="glass-card" style={{ padding: '20px' }}>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '1px' }}>{c.label}</span>
-                <p style={{ fontWeight: '600', marginTop: '5px' }}>
-                  {c.link ? <a href={c.link} target="_blank" rel="noreferrer" style={{ color: 'var(--primary-orange)' }}>{c.value}</a> : c.value}
-                </p>
-              </div>
-            ))}
-            <a href="https://wa.me/917383374584" className="btn-primary" style={{ marginTop: '20px', justifyContent: 'center' }}>
-              💬 Chat on WhatsApp
-            </a>
-          </div>
+    <section className="section contact-bg" id="contact">
+      <div className="inner">
+        <div className="reveal visible" style={{ textAlign: 'center' }}>
+          <div className="s-tag">📞 Contact Us</div>
+          <h2 className="s-title">Get a <span className="gradient-text">Free Quote</span> Today</h2>
+          <p className="s-sub" style={{ margin: '0 auto 56px' }}>Ready to secure your premises? Fill out the form below or connect with us directly on WhatsApp.</p>
         </div>
 
-        <div className="reveal-right">
-          <form className="glass-card" style={{ padding: '40px' }} onSubmit={handleSubmit}>
-            <div className="grid" style={{ gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-              <div className="form-group" style={{ gridColumn: 'span 1' }}>
-                <label>Name</label>
-                <input type="text" placeholder="John Doe" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-              </div>
-              <div className="form-group" style={{ gridColumn: 'span 1' }}>
-                <label>Phone</label>
-                <input type="tel" placeholder="+91 00000 00000" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-              </div>
+        <div className="contact-wrap">
+          <div className="reveal-left visible">
+            <div className="flex flex-col gap-2" style={{ gap: '24px' }}>
+              {contactInfo.map((ci, i) => (
+                <div key={i} className="flex items-center gap-1" style={{ gap: '20px' }}>
+                  <div style={{ width: '50px', height: '50px', borderRadius: '14px', background: 'var(--glass)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                    {ci.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.7rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{ci.label}</div>
+                    <div style={{ fontWeight: '700', fontSize: '1rem' }}>
+                      {ci.link ? <a href={ci.link} style={{ color: 'inherit' }}>{ci.value}</a> : ci.value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <a href="https://wa.me/917383374584" className="btn-fire" style={{ background: '#25d366', marginTop: '10px', width: 'fit-content' }}>
+                💬 Chat on WhatsApp
+              </a>
             </div>
-            
-            <div className="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="john@example.com" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-            </div>
+          </div>
 
-            <div className="form-group">
-              <label>Service Interested In</label>
-              <select required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})}>
-                <option value="">Select Service</option>
-                <option value="AMC">AMC - Maintenance</option>
-                <option value="Refilling">Refilling & Servicing</option>
-                <option value="NOC">NOC & Consultancy</option>
-                <option value="Products">New Equipment Purchase</option>
-                <option value="Training">Fire Safety Training</option>
-              </select>
-            </div>
+          <div className="reveal-right visible">
+            <div className="form-card">
+              <h3 style={{ marginBottom: '24px', fontWeight: '800' }}>🔥 Inquiry Form</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="flex" style={{ gap: '16px', flexWrap: 'wrap' }}>
+                  <div className="fg" style={{ flex: '1 1 200px' }}>
+                    <input 
+                      type="text" 
+                      placeholder="Your Full Name" 
+                      required 
+                      value={formData.name} 
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    />
+                  </div>
+                  <div className="fg" style={{ flex: '1 1 200px' }}>
+                    <input 
+                      type="tel" 
+                      placeholder="Phone Number" 
+                      required 
+                      value={formData.phone} 
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    />
+                  </div>
+                </div>
+                
+                <div className="fg">
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    required 
+                    value={formData.email} 
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  />
+                </div>
 
-            <div className="form-group">
-              <label>Message</label>
-              <textarea rows="4" placeholder="Tell us about your requirements..." required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})}></textarea>
-            </div>
+                <div className="fg">
+                  <select 
+                    required 
+                    value={formData.service} 
+                    onChange={(e) => setFormData({...formData, service: e.target.value})}
+                  >
+                    <option value="">Select Service Required</option>
+                    <option value="Extinguisher / Refilling">Fire Extinguisher / Refilling</option>
+                    <option value="Hydrant System">Fire Hydrant System</option>
+                    <option value="Alarm & Detection">Fire Alarm & Detection</option>
+                    <option value="AMC">AMC (Annual Maintenance)</option>
+                    <option value="Consultancy / NOC">Fire Consultancy / NOC</option>
+                    <option value="CCTV / Security">CCTV / Security System</option>
+                  </select>
+                </div>
 
-            <button type="submit" className={`submit-btn ${submitted ? 'success' : ''}`}>
-              {submitted ? '✅ Message Sent!' : '🔥 Submit Enquiry'}
-            </button>
-          </form>
+                <div className="fg">
+                  <textarea 
+                    rows="4" 
+                    placeholder="Message or specific safety requirements..." 
+                    required 
+                    value={formData.message} 
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className={`btn-fire ${status === 'success' ? 'success' : ''}`} 
+                  style={{ width: '100%', padding: '18px', background: status === 'success' ? '#25d366' : '' }}
+                >
+                  {status === 'idle' && '🔥 Send Inquiry →'}
+                  {status === 'submitting' && '🚀 Processing...'}
+                  {status === 'success' && '✅ Inquiry Sent!'}
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </section>

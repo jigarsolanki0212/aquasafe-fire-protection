@@ -13,36 +13,40 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-      <div className="logo-container">
-        <svg className="logo-flame" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C12 2 4 8 4 14C4 18.4183 7.58172 22 12 22C16.4183 22 20 18.4183 20 14C20 8 12 2 12 2Z" fill="url(#flame-grad)"/>
-          <path d="M12 6C12 6 8 10 8 14C8 16.2091 9.79086 18 12 18C14.2091 18 16 16.2091 16 14C16 10 12 6 12 6Z" fill="#ffb347"/>
-          <defs>
-            <linearGradient id="flame-grad" x1="12" y1="2" x2="12" y2="22" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#e8251a" />
-              <stop offset="1" stopColor="#f5820d" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="flex flex-col">
-          <span className="logo-text">
-            <span className="logo-aqua">Aqua</span> <span className="logo-fire">Safe</span>
-          </span>
-          <span className="nav-sublabel">Safety Solution · AMC · Refilling</span>
-        </div>
+      <div className="flex items-center justify-between" style={{ height: '100%', maxWidth: '1200px', margin: 'auto', width: '100%' }}>
+        <a className="flex items-center gap-1" href="#home" style={{ textDecoration: 'none' }}>
+          <svg className="logo-flame" viewBox="0 0 40 48" fill="none">
+            <path d="M20 2C20 2 8 16 8 28c0 7.7 5.4 14 12 14s12-6.3 12-14C32 20 20 2 20 2z" fill="url(#fg1)"/>
+            <path d="M20 18c0 0-5 7-5 13 0 3.3 2.2 6 5 6s5-2.7 5-6c0-6-5-13-5-13z" fill="url(#fg2)" opacity="0.8"/>
+            <defs>
+              <linearGradient id="fg1" x1="20" y1="2" x2="20" y2="42" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#f5820d"/>
+                <stop offset="100%" stopColor="#e8251a"/>
+              </linearGradient>
+              <linearGradient id="fg2" x1="20" y1="18" x2="20" y2="42" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#ffb347"/>
+                <stop offset="100%" stopColor="#f5820d"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="logo-text">
+            <div className="brand"><span className="a">Aqua</span> Safe <span className="f">Fire</span></div>
+            <div className="sub">Safety Success Protection</div>
+          </div>
+        </a>
+        
+        <ul className="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <a className="btn-fire" href="#contact" style={{ padding: '10px 24px', fontSize: '0.85rem' }}>
+          🔥 Get Quote
+        </a>
       </div>
-      
-      <div className="nav-links">
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#services">Services</a>
-        <a href="#industries">Industries</a>
-        <a href="#contact">Contact</a>
-      </div>
-
-      <a href="#contact" className="btn-primary" style={{ padding: '10px 24px', fontSize: '0.9rem' }}>
-        🔥 Get Quote
-      </a>
     </nav>
   );
 };
