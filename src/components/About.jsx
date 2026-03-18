@@ -12,38 +12,32 @@ const About = () => {
 
   return (
     <section className="section" id="about">
-      <div className="inner">
-        <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '70px', alignItems: 'center' }}>
-          <div className="reveal visible" style={{ textAlign: 'left' }}>
-            <div className="s-tag">🔥 About Us</div>
-            <h2 className="s-title">Protecting Gujarat<br /><span>Since Day One</span></h2>
-            <div style={{ marginBottom: '24px' }}>
-              <p className="s-sub" style={{ marginBottom: '16px' }}>
-                Aqua Safe Fire Protection is a certified, MSME-registered fire safety company based in Ahmedabad. 
-                Our expertise covers end-to-end fire protection — from system design and NOC to installation, refilling, and annual maintenance.
-              </p>
-              <p className="s-sub" style={{ marginBottom: '16px' }}>
-                Being a GeM-listed provider, we serve factories, offices, hotels, hospitals, and residential complexes 
-                across Gujarat with full compliance and rapid turnaround times.
-              </p>
-            </div>
-            <div className="flex items-center gap-1" style={{ background: 'rgba(245,130,13,.06)', border: '1px solid rgba(245,130,13,.2)', borderRadius: '12px', padding: '16px 24px', display: 'inline-flex', gap: '16px' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '80px', alignItems: 'center' }}>
+          <div className="reveal">
+            <div className="s-tag">🔥 Elite Safety Experts</div>
+            <h2 className="s-title">Protecting Gujarat<br /><span className="gradient-text">Since Day One</span></h2>
+            <p className="s-sub" style={{ marginBottom: '24px' }}>
+              Aqua Safe Fire Protection is a certified, MSME-registered company based in Ahmedabad. 
+              We provide total fire safety solutions — from system design and NOC to installation, refilling, and maintenance.
+            </p>
+            <div style={{ background: 'var(--glass)', border: '1px solid var(--border)', borderRadius: '20px', padding: '24px', display: 'inline-flex', gap: '24px', alignItems: 'center' }}>
               <div>
-                <div style={{ fontSize: '0.65rem', color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>GSTIN / UIN</div>
-                <div style={{ fontSize: '1rem', fontWeight: '800', color: '#fff', letterSpacing: '1px' }}>24FOSPP5631F2ZK</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>GSTIN / UIN</div>
+                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: 'var(--text)', letterSpacing: '1px' }}>24FOSPP5631F2ZK</div>
               </div>
             </div>
           </div>
 
-          <div className="grid reveal visible" style={{ gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
             {highlights.map((h, i) => (
-              <div key={i} className="card" style={{ padding: '24px', textAlign: 'left', display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'var(--gradient-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', flexShrink: 0 }}>
+              <div key={i} className="deluxe-card reveal" style={{ padding: '30px', textAlign: 'left', display: 'flex', gap: '20px', alignItems: 'center' }}>
+                <div style={{ width: '48px', height: '48px', borderRadius: '14px', background: 'var(--gradient-fire)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
                   {h.icon}
                 </div>
                 <div>
-                  <div style={{ fontSize: '0.85rem', fontWeight: '800', color: '#fff' }}>{h.title}</div>
-                  <div style={{ fontSize: '0.7rem', color: 'var(--muted)' }}>{h.sub}</div>
+                  <div style={{ fontSize: '0.9rem', fontWeight: '800', color: 'var(--text)' }}>{h.title}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{h.sub}</div>
                 </div>
               </div>
             ))}

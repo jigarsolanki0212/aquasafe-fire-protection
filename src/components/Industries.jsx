@@ -2,30 +2,23 @@ import React from 'react';
 
 const Industries = () => {
   const industries = [
-    "🏭 Manufacturing", "🏢 Offices", "🏨 Hotels", "🏥 Hospitals", 
-    "🏫 Schools", "⛽ Petrol Pumps", "🏗️ Construction", "🏠 Societies", 
-    "🏬 Malls", "🏛️ Government Buildings", "🚗 Automobile", "💊 Pharma"
+    "Industrial Factories", "Chemical Plants", "Textile Units", 
+    "Pharma Units", "High-Rise Buildings", "Hotels & Resorts", 
+    "Hospitals & Clinics", "Educational Institutes", "Residential Schemes"
   ];
 
   return (
-    <section className="section bg-color" id="industries">
-      <div className="inner">
-        <div className="reveal visible" style={{ textAlign: 'left' }}>
-          <div className="s-tag">🏭 Industries Served</div>
-          <h2 className="s-title">Sectors <span className="gradient-text">We Protect</span></h2>
-          <p className="s-sub" style={{ marginBottom: '40px' }}>Providing fire safety compliance and solutions across Gujarat's diverse industries.</p>
+    <section className="section" id="industries">
+      <div className="container">
+        <div className="reveal" style={{ textAlign: 'center' }}>
+          <div className="s-tag">🏢 Trusted Across Industries</div>
+          <h2 className="s-title">Providing Safety for <br /><span className="gradient-text">Every Sector</span></h2>
         </div>
 
-        <div className="flex" style={{ flexWrap: 'wrap', gap: '16px', justifyContent: 'flex-start' }}>
+        <div className="flex flex-wrap gap-1 items-center justify-center" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginTop: '60px' }}>
           {industries.map((ind, i) => (
-            <div 
-              key={i} 
-              className="chip reveal visible" 
-              style={{ padding: '12px 24px', borderRadius: '50px', background: 'var(--glass)', border: '1px solid var(--border)', fontSize: '0.9rem', fontWeight: '500', color: 'var(--muted)', cursor: 'default', transition: 'all 0.3s' }}
-              onMouseEnter={(e) => { e.target.style.background = 'rgba(232, 37, 26, 0.08)'; e.target.style.borderColor = 'rgba(232, 37, 26, 0.35)'; e.target.style.color = '#fff'; e.target.style.transform = 'translateY(-3px)'; }}
-              onMouseLeave={(e) => { e.target.style.background = 'var(--glass)'; e.target.style.borderColor = 'var(--border)'; e.target.style.color = 'var(--muted)'; e.target.style.transform = 'translateY(0)'; }}
-            >
-              {ind}
+            <div key={i} className="deluxe-card reveal" style={{ padding: '16px 32px', borderRadius: '50px', background: 'var(--glass)', border: '1px solid var(--border)', fontSize: '0.95rem', fontWeight: '800', cursor: 'pointer', transition: 'all 0.4s' }}>
+              🎯 {ind}
             </div>
           ))}
         </div>

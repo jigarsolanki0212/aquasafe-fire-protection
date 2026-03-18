@@ -15,7 +15,7 @@ const Products = () => {
   return (
     <section className="section" id="products">
       <div className="container">
-        <div className="reveal visible" style={{ textAlign: 'center' }}>
+        <div className="reveal" style={{ textAlign: 'center' }}>
           <div className="s-tag">🧯 Safety Solutions</div>
           <h2 className="s-title">Modern <span className="gradient-text">Safety Arsenal</span></h2>
           <p className="s-sub" style={{ margin: '0 auto 60px' }}>
@@ -24,15 +24,15 @@ const Products = () => {
           </p>
         </div>
 
-        <div className="cards-grid">
+        <div className="cards-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
           {list.map((p, i) => (
-            <div key={i} className="deluxe-card reveal visible" style={{ textAlign: 'center', padding: '50px 30px' }}>
+            <div key={i} className="deluxe-card reveal" style={{ textAlign: 'center', padding: '50px 30px' }}>
               <div style={{ fontSize: '3.5rem', marginBottom: '24px', display: 'block' }}>{p.icon}</div>
-              <h3 style={{ marginBottom: '16px', fontSize: '1.25rem', fontWeight: '800' }}>{p.title}</h3>
+              <h3 style={{ marginBottom: '16px', fontSize: '1.25rem', fontWeight: '800', color: 'var(--text)' }}>{p.title}</h3>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: '1.7' }}>{p.desc}</p>
               <div style={{ marginTop: '24px', display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                <span style={{ fontSize: '0.7rem', padding: '4px 10px', borderRadius: '50px', background: 'rgba(232,37,26,0.1)', color: 'var(--orange)', fontWeight: '700' }}>CERTIFIED</span>
-                <span style={{ fontSize: '0.7rem', padding: '4px 10px', borderRadius: '50px', background: 'rgba(255,179,71,0.1)', color: 'var(--gold)', fontWeight: '700' }}>PREMIUM</span>
+                <span style={{ fontSize: '0.7rem', padding: '6px 14px', borderRadius: '50px', background: 'rgba(232,37,26,0.08)', color: 'var(--orange)', fontWeight: '800', border: '1px solid rgba(232,37,26,0.1)' }}>CERTIFIED</span>
+                <span style={{ fontSize: '0.7rem', padding: '6px 14px', borderRadius: '50px', background: 'rgba(255,179,71,0.08)', color: 'var(--gold)', fontWeight: '800', border: '1px solid rgba(255,179,71,0.1)' }}>PREMIUM</span>
               </div>
             </div>
           ))}

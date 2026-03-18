@@ -13,7 +13,7 @@ import WhatsAppButton from './components/WhatsAppButton';
 
 function App() {
   useEffect(() => {
-    // Optimized Cursor Glow
+    // 1. Optimized Cursor Glow
     const glow = document.getElementById('cursor-glow');
     const updateMousePos = (e) => {
       if (glow) {
@@ -22,7 +22,7 @@ function App() {
     };
     window.addEventListener('mousemove', updateMousePos);
     
-    // Intersection Observer for all reveal elements
+    // 2. Advanced Intersection Observer
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(e => { 
         if (e.isIntersecting) {
@@ -33,37 +33,8 @@ function App() {
     
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     
-    // Counter Animation Logic
-    const statsObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.querySelectorAll('.counter').forEach(c => {
-            const targetStr = c.getAttribute('data-target');
-            const target = parseInt(targetStr);
-            if (isNaN(target)) return;
-            
-            let count = 0;
-            const duration = 2000;
-            const step = (time) => {
-              if (!startTime) startTime = time;
-              const progress = Math.min((time - startTime) / duration, 1);
-              const eased = 1 - Math.pow(1 - progress, 4); // EaseOutQuart
-              c.innerText = Math.floor(eased * target) + (targetStr.includes('+') ? '+' : '');
-              if (progress < 1) requestAnimationFrame(step);
-            };
-            let startTime = null;
-            requestAnimationFrame(step);
-          });
-          statsObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.5 });
-    
-    const heroStats = document.querySelector('.hero-stats');
-    if (heroStats) statsObs.observe(heroStats);
-
-    // 3D Tilt & Magnetic Shine Effect
-    const handleCardMove = (e) => {
+    // 3. 3D Tilt & Magnetic Effect Engine
+    const handleDynamicInteractions = (e) => {
       const card = e.currentTarget;
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -75,29 +46,47 @@ function App() {
       
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
-      const rotateX = ((y - centerY) / centerY) * 10;
-      const rotateY = ((centerX - x) / centerX) * 10;
       
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02) translateY(-10px)`;
+      // Magnetic pull logic (for buttons)
+      if (card.classList.contains('btn-fire') || card.classList.contains('theme-toggle')) {
+        const moveX = (x - centerX) * 0.4;
+        const moveY = (y - centerY) * 0.4;
+        card.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) scale(1.05)`;
+      } else {
+        // Standard 3D Tilt
+        const rotateX = ((y - centerY) / centerY) * 10;
+        const rotateY = ((centerX - x) / centerX) * 10;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px) scale(1.02)`;
+      }
     };
     
     const resetCard = (e) => {
-      e.currentTarget.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateY(0)`;
+      e.currentTarget.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)`;
     };
     
-    const cards = document.querySelectorAll('.deluxe-card, .stat-box, .btn-fire');
-    cards.forEach(card => {
-      card.addEventListener('mousemove', handleCardMove);
-      card.addEventListener('mouseleave', resetCard);
+    const targets = document.querySelectorAll('.deluxe-card, .stat-box, .btn-fire, .theme-toggle');
+    targets.forEach(t => {
+      t.addEventListener('mousemove', handleDynamicInteractions);
+      t.addEventListener('mouseleave', resetCard);
     });
+
+    // 4. Smooth Scroll Parallax
+    const handleParallaxScroll = () => {
+      const scrolled = window.scrollY;
+      const backgrounds = document.querySelectorAll('.bg-aura');
+      backgrounds.forEach(bg => {
+        bg.style.transform = `translateY(${scrolled * 0.15}px)`;
+      });
+    };
+    window.addEventListener('scroll', handleParallaxScroll);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePos);
+      window.removeEventListener('scroll', handleParallaxScroll);
       document.querySelectorAll('.reveal').forEach(el => obs.unobserve(el));
-      if (heroStats) statsObs.unobserve(heroStats);
-      cards.forEach(card => {
-        card.removeEventListener('mousemove', handleCardMove);
-        card.removeEventListener('mouseleave', resetCard);
+      targets.forEach(t => {
+        t.removeEventListener('mousemove', handleDynamicInteractions);
+        t.removeEventListener('mouseleave', resetCard);
       });
     };
   }, []);
@@ -105,15 +94,16 @@ function App() {
   return (
     <div className="main-wrapper">
       <div id="cursor-glow"></div>
+      <div className="bg-aura"></div>
       <Navbar />
       <Hero />
       <Marquee />
-      <About />
-      <Products />
-      <Services />
-      <WhyChoose />
-      <Industries />
-      <Contact />
+      <div id="about"><About /></div>
+      <div id="products"><Products /></div>
+      <div id="services"><Services /></div>
+      <div id="why"><WhyChoose /></div>
+      <div id="industries"><Industries /></div>
+      <div id="contact"><Contact /></div>
       <Footer />
       <WhatsAppButton />
     </div>
