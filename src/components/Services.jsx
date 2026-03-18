@@ -12,7 +12,7 @@ const Services = () => {
 
   return (
     <section className="section" id="services">
-      <div className="container" style={{ position: 'relative', z-index: 2 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div className="reveal visible" style={{ textAlign: 'center' }}>
           <div className="s-tag">⚙️ Professional Services</div>
           <h2 className="s-title">Elite <span className="gradient-text">Safety Services</span></h2>
