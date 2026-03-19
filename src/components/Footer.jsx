@@ -1,41 +1,58 @@
 import React from 'react';
+import { Flame, ShieldCheck, Mail, MapPin, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="footer" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', padding: '80px 5% 40px' }}>
-      <div className="container" style={{ textAlign: 'center' }}>
-        <a href="/" className="logo" style={{ justifyContent: 'center', marginBottom: '40px' }}>
-          <svg className="logo-flame" viewBox="0 0 100 120" fill="none" style={{ width: '40px' }}>
-            <path d="M50 0C50 0 20 40 20 75C20 95 33 115 50 115C67 115 80 95 80 75C80 40 50 0 50 0Z" fill="var(--red)" />
-            <path d="M50 30C50 30 35 60 35 80C35 95 42 105 50 105C58 105 65 95 65 80C65 60 50 30 50 30Z" fill="var(--orange)" />
-          </svg>
-          <div className="logo-text" style={{ textAlign: 'left' }}>
-            <div className="logo-brand" style={{ fontSize: '1.4rem', fontWeight: '900' }}>Aqua Safe <span style={{ color: 'var(--red)' }}>Fire</span></div>
-            <div className="logo-sub" style={{ fontSize: '0.7rem' }}>Safety Success Protection (Ahmedabad)</div>
+    <footer className="footer" style={{ background: 'var(--bg)', borderTop: '1px solid var(--border)', padding: '80px 0 40px' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', marginBottom: '80px' }}>
+          <div>
+            <a href="/" className="logo" style={{ marginBottom: '24px' }}>
+              <div className="logo-flame">
+                <Flame size={32} color="var(--red)" fill="var(--red)" fillOpacity={0.2} />
+              </div>
+              <div className="logo-text">
+                <div className="logo-brand" style={{ fontSize: '1.4rem', fontWeight: '800' }}>AquaSafe <span style={{ color: 'var(--red)' }}>Fire</span></div>
+                <div className="logo-sub">Safety • Success • Protection</div>
+              </div>
+            </a>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: '1.7', maxWidth: '400px' }}>
+              Ahmedabad's most trusted fire safety partner. Providing certified equipment, 
+              expert consultancy, and complete protection for your projects across Gujarat.
+            </p>
           </div>
-        </a>
 
-        <div style={{ maxWidth: '800px', margin: '0 auto 40px' }}>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-            Ahmedabad's most trusted fire safety partner. Providing ISI certified equipment, 
-            professional refilling, and expert consultancy for industrial and commercial sectors across Gujarat.
-          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '40px' }}>
+            <div>
+              <h4 style={{ color: 'var(--text)', marginBottom: '24px', fontSize: '1rem', fontWeight: '800' }}>Company</h4>
+              <ul style={{ listStyle: 'none', display: 'grid', gap: '16px' }}>
+                <li><a href="#about" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '600' }}>About Us</a></li>
+                <li><a href="#products" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '600' }}>Products</a></li>
+                <li><a href="#services" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '600' }}>Services</a></li>
+                <li><a href="#contact" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '600' }}>Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 style={{ color: 'var(--text)', marginBottom: '24px', fontSize: '1rem', fontWeight: '800' }}>Inquiries</h4>
+              <ul style={{ listStyle: 'none', display: 'grid', gap: '16px' }}>
+                <li style={{ display: 'flex', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  <Mail size={16} color="var(--red)" /> aquasafefireprotection55@gmail.com
+                </li>
+                <li style={{ display: 'flex', gap: '8px', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                  <Phone size={16} color="var(--red)" /> +91 73833 74584
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '30px', justifyContent: 'center', marginBottom: '60px', flexWrap: 'wrap' }}>
-          <a href="#about" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: '800', fontSize: '0.9rem' }}>About Us</a>
-          <a href="#products" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: '800', fontSize: '0.9rem' }}>Products</a>
-          <a href="#services" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: '800', fontSize: '0.9rem' }}>Services</a>
-          <a href="#contact" style={{ color: 'var(--text)', textDecoration: 'none', fontWeight: '800', fontSize: '0.9rem' }}>Contact</a>
-        </div>
-
-        <div style={{ padding: '32px 0', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
+        <div style={{ paddingTop: '40px', borderTop: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '20px' }}>
           <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            © 2026 Aqua Safe Fire Protection. All rights reserved. 
-            <span style={{ marginLeft: '10px', color: 'var(--text)', fontWeight: '700' }}>GST: 24FOSPP5631F2ZK</span>
+            © 2026 AquaSafe Fire Protection. All rights reserved. 
+            <span style={{ marginLeft: '12px', color: 'var(--text)', fontWeight: '700' }}>GST: 24FOSPP5631F2ZK</span>
           </div>
-          <div style={{ display: 'flex', gap: '4px', alignItems: 'center', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            Proudly Made in Ahmedabad, India 🇮🇳
+          <div style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '600' }}>
+            <ShieldCheck size={16} color="#22c55e" /> Certified Safety Partner
           </div>
         </div>
       </div>
@@ -44,3 +61,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
