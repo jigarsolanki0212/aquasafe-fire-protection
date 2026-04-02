@@ -1,7 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { MapPin, Phone, Mail, FileText, Send, CheckCircle2, MessageSquareText } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
+};
+
+const stagger = {
+  visible: { transition: { staggerChildren: 0.1 } }
+};
 
 const Contact = () => {
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -9,31 +22,77 @@ const Contact = () => {
     service: '',
     message: ''
   });
+
+  // Pre-fill form from URL param
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const item = params.get('item');
+    if (item) {
+      setFormData(prev => ({
+        ...prev,
+        message: `I would like to request a quote for: ${item}`,
+        service: 'System Installation' // default pick
+      }));
+    }
+  }, [location.search]);
+
   const [status, setStatus] = useState('idle');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('submitting');
-    const body = `Name: ${formData.name}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nService: ${formData.service}\n\nMessage: ${formData.message}`;
-    window.location.href = `mailto:aquasafefireprotection55@gmail.com?subject=New Inquiry from ${formData.name}&body=${encodeURIComponent(body)}`;
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', phone: '', email: '', service: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 1000);
+    
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/jigssolanki82@gmail.com", {
+        method: "POST",
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          service: formData.service,
+          message: formData.message,
+          _subject: `New AquaSafe Inquiry from ${formData.name}`,
+          _template: "table" // Makes the email look nice
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', phone: '', email: '', service: '', message: '' });
+        setTimeout(() => setStatus('idle'), 4000);
+      } else {
+        console.error("Form submission failed:", await response.text());
+        setStatus('idle');
+        alert("Failed to send inquiry. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus('idle');
+      alert("Network error. Please try again.");
+    }
   };
 
   const contactInfo = [
     { icon: <MapPin size={24} />, label: 'Office Address', value: 'Shop No. 512, Hiltown Centre, Ahmedabad – 382330' },
     { icon: <Phone size={24} />, label: 'Direct Line', value: '+91 73833 74584', link: 'tel:+917383374584' },
-    { icon: <Mail size={24} />, label: 'Email Support', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
+    { icon: <Mail size={24} />, label: 'Email Support', value: 'jigssolanki82@gmail.com', link: 'mailto:jigssolanki82@gmail.com' },
     { icon: <FileText size={24} />, label: 'GSTIN / Registration', value: '24FOSPP5631F2ZK' }
   ];
 
   return (
     <section className="section" id="contact" style={{ background: 'var(--bg-accent)', borderTop: '1px solid var(--border)' }}>
       <div className="container">
-        <div className="reveal" style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px' }}>
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={fadeUp}
+          style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 60px' }}
+        >
           <div className="s-tag">
             <Phone size={16} /> Professional Consultancy
           </div>
@@ -42,28 +101,40 @@ const Contact = () => {
             Get expert advice for your industrial, commercial, or residential safety needs. 
             Ahmedabad's most trusted fire safety professionals are ready to help.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid-2" style={{ alignItems: 'start' }}>
-          <div className="reveal">
+          <motion.div 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true }} 
+            variants={stagger}
+          >
             <div style={{ display: 'grid', gap: '16px' }}>
               {contactInfo.map((ci, i) => (
-                <div key={i} className="deluxe-card" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center', textAlign: 'left' }}>
+                <motion.div variants={fadeUp} key={i} className="deluxe-card" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center', textAlign: 'left' }}>
                   <div style={{ flexShrink: 0, width: '56px', height: '56px', borderRadius: '14px', background: 'var(--gradient-fire)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                     {ci.icon}
                   </div>
                   <div>
                     <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '800', letterSpacing: '1px', marginBottom: '4px' }}>{ci.label}</div>
                     <div style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--text)', wordBreak: 'break-word' }}>
-                      {ci.link ? <a href={ci.link} style={{ color: 'inherit', textDecoration: 'none', transition: 'var(--transition)' }}>{ci.value}</a> : ci.value}
+                      {ci.link ? <a href={ci.link} style={{ color: 'inherit', textDecoration: 'none' }}>{ci.value}</a> : ci.value}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="deluxe-card reveal" style={{ padding: '40px' }}>
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="deluxe-card" 
+            style={{ padding: '40px' }}
+          >
             <h3 style={{ marginBottom: '32px', fontSize: '1.5rem', fontWeight: '800', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               <MessageSquareText size={24} color="var(--red)" /> Inquiry Form
             </h3>
@@ -75,7 +146,7 @@ const Contact = () => {
                   required 
                   value={formData.name} 
                   onChange={(e) => setFormData({...formData, name: e.target.value})} 
-                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', transition: 'var(--transition)' }} 
+                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none' }} 
                 />
                 <input 
                   type="tel" 
@@ -83,7 +154,7 @@ const Contact = () => {
                   required 
                   value={formData.phone} 
                   onChange={(e) => setFormData({...formData, phone: e.target.value})} 
-                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', transition: 'var(--transition)' }} 
+                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none' }} 
                 />
                 <input 
                   type="email" 
@@ -91,14 +162,14 @@ const Contact = () => {
                   required 
                   value={formData.email} 
                   onChange={(e) => setFormData({...formData, email: e.target.value})} 
-                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', transition: 'var(--transition)' }} 
+                  style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none' }} 
                 />
               </div>
               <select 
                 required 
                 value={formData.service} 
                 onChange={(e) => setFormData({...formData, service: e.target.value})} 
-                style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', transition: 'var(--transition)' }}
+                style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none' }}
               >
                 <option value="">Select Service</option>
                 <option value="Extinguisher Refill">Extinguisher Refill</option>
@@ -112,7 +183,7 @@ const Contact = () => {
                 required 
                 value={formData.message} 
                 onChange={(e) => setFormData({...formData, message: e.target.value})} 
-                style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', resize: 'none', transition: 'var(--transition)' }}
+                style={{ width: '100%', padding: '16px', borderRadius: '12px', background: 'var(--glass)', border: '1px solid var(--glass-border)', color: 'var(--text)', outline: 'none', resize: 'none' }}
               ></textarea>
               <button 
                 type="submit" 
@@ -125,7 +196,7 @@ const Contact = () => {
                 {status === 'success' && <><CheckCircle2 size={18} /> Inquiry Sent!</>}
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -133,4 +204,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
