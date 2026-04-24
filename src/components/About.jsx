@@ -24,7 +24,7 @@ const About = () => {
               AquaSafe Fire Protection is a certified, MSME-registered company based in Ahmedabad. 
               We provide total fire safety solutions — from system design and NOC to installation, refilling, and maintenance.
             </p>
-            <div style={{ background: 'var(--glass)', border: '1px solid var(--glass-border)', borderRadius: '24px', padding: '32px', display: 'inline-flex', gap: '24px', alignItems: 'center' }}>
+            <div className="reg-tag">
               <div>
                 <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px', fontWeight: '700' }}>GSTIN / Registration</div>
                 <div style={{ fontSize: '1.25rem', fontWeight: '800', color: 'var(--text)', letterSpacing: '1px' }}>24FOSPP5631F2ZK</div>

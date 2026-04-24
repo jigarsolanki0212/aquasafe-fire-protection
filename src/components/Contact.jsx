@@ -43,7 +43,7 @@ const Contact = () => {
     setStatus('submitting');
     
     try {
-      const response = await fetch("https://formsubmit.co/ajax/jigssolanki82@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/aquasafefireprotection55@gmail.com", {
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const Contact = () => {
   const contactInfo = [
     { icon: <MapPin size={24} />, label: 'Office Address', value: 'Shop No. 512, Hiltown Centre, Ahmedabad – 382330' },
     { icon: <Phone size={24} />, label: 'Direct Line', value: '+91 73833 74584', link: 'tel:+917383374584' },
-    { icon: <Mail size={24} />, label: 'Email Support', value: 'jigssolanki82@gmail.com', link: 'mailto:jigssolanki82@gmail.com' },
+    { icon: <Mail size={24} />, label: 'Email Support', value: 'aquasafefireprotection55@gmail.com', link: 'mailto:aquasafefireprotection55@gmail.com' },
     { icon: <FileText size={24} />, label: 'GSTIN / Registration', value: '24FOSPP5631F2ZK' }
   ];
 
@@ -112,7 +112,7 @@ const Contact = () => {
           >
             <div style={{ display: 'grid', gap: '16px' }}>
               {contactInfo.map((ci, i) => (
-                <motion.div variants={fadeUp} key={i} className="deluxe-card" style={{ padding: '24px', display: 'flex', gap: '20px', alignItems: 'center', textAlign: 'left' }}>
+                <motion.div variants={fadeUp} key={i} className="deluxe-card contact-info-card">
                   <div style={{ flexShrink: 0, width: '56px', height: '56px', borderRadius: '14px', background: 'var(--gradient-fire)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff' }}>
                     {ci.icon}
                   </div>
@@ -132,8 +132,7 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="deluxe-card" 
-            style={{ padding: '40px' }}
+            className="deluxe-card contact-form-card" 
           >
             <h3 style={{ marginBottom: '32px', fontSize: '1.5rem', fontWeight: '800', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
               <MessageSquareText size={24} color="var(--red)" /> Inquiry Form

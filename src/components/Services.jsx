@@ -33,7 +33,7 @@ const Services = () => {
           <h2 className="s-title">Dedicated to <span className="gradient-text">Absolute Protection</span></h2>
           <p className="s-sub" style={{ margin: '0 auto' }}>
             From consultancy to maintenance, we manage your fire safety lifecycle
-            with unmatched precision and local expertise.
+            with unmatched precision and local expertise across Gujarat & India.
           </p>
         </motion.div>
 

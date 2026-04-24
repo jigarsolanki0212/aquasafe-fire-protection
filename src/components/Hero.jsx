@@ -18,8 +18,8 @@ const Hero = () => {
     if (titleRef.current) {
       const words = titleRef.current.innerText.split(' ');
       titleRef.current.innerHTML = words.map((word, i) => 
-        `<span style="display:inline-block; opacity:0; transform:translateY(30px); transition:all 0.6s cubic-bezier(0.2,1,0.3,1) ${i * 0.1}s">${word}&nbsp;</span>`
-      ).join('');
+        `<span style="display:inline-block; opacity:0; transform:translateY(30px); transition:all 0.6s cubic-bezier(0.2,1,0.3,1) ${i * 0.1}s">${word}</span>`
+      ).join(' ');
       
       setTimeout(() => {
         const spans = titleRef.current.querySelectorAll('span');
@@ -86,17 +86,20 @@ const Hero = () => {
               ref={titleRef}
               className="s-title" 
             >
-              We Secure What You've Built. With Precision.
+              Premium Fire Safety Services in Gujarat.
             </h1>
             <p className="s-sub">
-              Ahmedabad’s leading fire safety company delivering end-to-end protection 
-              for industrial, commercial, and residential spaces. 
-              <span style={{ display: 'block', marginTop: '16px', fontWeight: '800', color: 'var(--red)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                Government Certified • GeM Listed • Professional
-              </span>
+              Gujarat’s leading fire safety company delivering end-to-end protection 
+              for industrial, commercial, and residential spaces.
             </p>
+
+            <div className="cert-tags reveal">
+              <span className="cert-tag">Government Certified</span>
+              <span className="cert-tag">GeM Listed</span>
+              <span className="cert-tag">Professional</span>
+            </div>
             
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <div className="hero-btns reveal">
               <a href="#contact" className="btn-fire">
                 Consultation <ArrowRight size={18} />
               </a>
